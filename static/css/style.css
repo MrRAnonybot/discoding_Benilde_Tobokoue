@@ -33,3 +33,19 @@ html, body {
     height: 40px;
     object-fit: cover;
 }
+
+/* Buttons */
+.btne, button {
+    background-color: #5865F2 !important;
+    border-color: #5865F2 !important;
+    color: white !important;
+}
+
+/* link a*/
+.register a{
+    color: #8496e8 !important;
+    text-decoration: none !important;
+}
+.register a:hover{
+    text-decoration: underline !important;
+}

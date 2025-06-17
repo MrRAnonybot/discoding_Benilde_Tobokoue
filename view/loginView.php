@@ -20,6 +20,7 @@
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary btn-lg btn-block w-100">Login</button>
+                    <p>Need an account? <a href="/index.php?action=register">Register</a></p>
                 </div>
             </form>
         </div>
