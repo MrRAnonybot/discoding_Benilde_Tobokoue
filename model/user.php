@@ -197,4 +197,44 @@ class User
 
         return $id;
     }
+
+    /*********************************************
+     * ------- CREATE NEW USER IN DATABASE -------
+     *********************************************/
+    public  static function createUser(User $user)
+    {
+        //open database connection
+        $db = init_db();
+
+        $req = $db->prepare("INSERT INTO users (email, username,password,avatar_url) VALUES (?, ?, ?, ?)");
+        $req->execute([
+            $user->getEmail(),
+            $user->getUsername(),
+            $user->getPassword(),
+            "/static/lib/bootstrap-icons-1.5.0/person-fill.svg"
+        ]);
+
+        $id = $db->lastInsertId();
+        //close database connection
+        $db = null;
+
+        return $id;
+    }
+
+    /***********************************************
+     * ------- CHECK IF EMAIL IS ALREADY USED -------
+     ***********************************************/
+    public static function findUserByEmail($email)
+    {
+        //open database connection
+        $db = init_db();
+
+        $req = $db->prepare("SELECT * FROM users WHERE email=?");
+        $req->execute([$email]);
+
+        //close database connection
+        $db = null;
+
+        return $req->fetch();
+    }
 }
