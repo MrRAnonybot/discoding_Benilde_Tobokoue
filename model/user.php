@@ -239,6 +239,9 @@ class User
         return $id;
     }
 
+    /******************************************
+     * ------- CHECK IF USER TAG EXISTS -------
+     ******************************************/
     public static function isTagTaken(string $username, string $tag):bool
     {
         $db = init_db();

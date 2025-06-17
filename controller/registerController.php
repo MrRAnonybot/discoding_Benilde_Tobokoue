@@ -17,14 +17,11 @@ function registerPage()
 
 
 function generateUniqueTag($username){
-    $attempts = 0;
-    $maxAttempts = 50;
-    while ($attempts < $maxAttempts) {
+    for ($i =1; $i<=9999; $i++) {
         $tag = str_pad(strval(rand(0, 9999)),4,"0",STR_PAD_LEFT);
         if(!user::isTagTaken($username,$tag)){
             return $tag;
         }
-        $attempts++;
     }
     throw new Exception("unable to generate unique tag");
 }
