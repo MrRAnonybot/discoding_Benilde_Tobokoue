@@ -41,7 +41,9 @@ function register($post)
     $user = new User();
     $user->setEmail($email);
     $user->setUsername($username);
-    $user->setPassword($password);
+    //hash the password
+    $hashedPassword = hash('sha256', $post['password']);
+    $user->setPassword($hashedPassword);
 
     $user_id =  User::createUser($user);
 

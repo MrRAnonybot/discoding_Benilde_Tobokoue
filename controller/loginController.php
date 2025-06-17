@@ -23,7 +23,8 @@ function login($post)
 {
 
     $email = $post['email'];
-    $password = $post['password'];
+    //hash the password for comparison
+    $password = hash('sha256', $post['password']);
     $user_data = User::getUserByCredentials($email, $password);
 
     if ($user_data == null) {
