@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="text-center">
-                    <p class="text-muted">Already have an account? <a href="/index.php?action=login">Log in</a></p>
+                    <p class="text-muted">Already have an account? <a href="/index.php?action=login" class="a-form">Log in</a></p>
                 </div>
             </form>
         </div>

@@ -35,17 +35,29 @@ html, body {
 }
 
 /* Buttons */
-.btne, button {
+button {
     background-color: #5865F2 !important;
     border-color: #5865F2 !important;
     color: white !important;
 }
+.btn-logOut {
+    background-color: #eb4246 !important;
+    border-color: #eb4246 !important;
+    color: white !important;
+}
+.btn-logOut:hover{
+    background-color: #ca3437 !important;
+    border-color: #d53a3d !important;
+    color: white !important;
+    text-decoration: none;
+}
 
 /* link a*/
-.register a{
+.a-form{
     color: #8496e8 !important;
     text-decoration: none !important;
 }
-.register a:hover{
+.a-form:hover{
+    color: #8496e8 !important;
     text-decoration: underline !important;
 }

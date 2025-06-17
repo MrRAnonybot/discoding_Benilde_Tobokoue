@@ -1,6 +1,6 @@
 <?php
 
-require_once('model/User.php');
+require_once('model/user.php');
 
 /************************************
  * ------- LOAD REGISTER PAGE -------
@@ -30,9 +30,9 @@ function register($post)
     }
 
     //check if email is already taken
-    $existing_user = User::findUserWithEmail($email);
+    $existing_user = User::findUserByEmail($email);
     if ($existing_user) {
-        $erorr_msg = "User already exists";
+        $erorr_msg = "An account already exists with this email address.";
         require('view/registerView.php');
         return;
     }

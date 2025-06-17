@@ -15,7 +15,8 @@
 <body>
 <?php if (isset($_SESSION['user_id'])): ?>
     <div class="container-fluid py-2 text-end px-4">
-        <a href="/index.php?action=logout" class="btn btn-danger">Déconnexion</a>
+
+        <a href="/index.php?action=logout" class="btn btn-logOut">log out</a>
     </div>
 <?php endif; ?>
 <?= $content; ?>
