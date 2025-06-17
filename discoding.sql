@@ -94,6 +94,7 @@ CREATE TABLE `users` (
   `id` int NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `tag` varchar(4) NOT NULL,
   `password` varchar(255) NOT NULL,
   `avatar_url` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

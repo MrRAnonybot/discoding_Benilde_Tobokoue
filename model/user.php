@@ -9,6 +9,7 @@ class User
     protected $username;
     protected $password;
     protected $avatar_url;
+    protected $tag;
 
     /**
      * @return mixed
@@ -88,6 +89,22 @@ class User
     public function setAvatarUrl($avatar_url)
     {
         $this->avatar_url = $avatar_url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
     }
 
 
@@ -206,12 +223,13 @@ class User
         //open database connection
         $db = init_db();
 
-        $req = $db->prepare("INSERT INTO users (email, username,password,avatar_url) VALUES (?, ?, ?, ?)");
+        $req = $db->prepare("INSERT INTO users (email, username,password,avatar_url,tag) VALUES (?, ?, ?, ?,?)");
         $req->execute([
             $user->getEmail(),
             $user->getUsername(),
             $user->getPassword(),
-            "/static/lib/bootstrap-icons-1.5.0/person-fill.svg"
+            "/static/lib/bootstrap-icons-1.5.0/person-fill.svg",
+            $user->getTag()
         ]);
 
         $id = $db->lastInsertId();
@@ -219,6 +237,16 @@ class User
         $db = null;
 
         return $id;
+    }
+
+    public static function isTagTaken(string $username, string $tag):bool
+    {
+        $db = init_db();
+        $req = $db->prepare("SELECT id FROM users WHERE username=? AND tag=?");
+        $req->execute([$username, $tag]);
+        $count = $req->fetchColumn();
+        $db = null;
+        return $count > 0;
     }
 
     /***********************************************

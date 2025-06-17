@@ -11,6 +11,24 @@ function registerPage()
     require ('view/registerView.php');
 }
 
+/******************************
+ * ------- TAG FUNCTION -------
+ *****************************/
+
+
+function generateUniqueTag($username){
+    $attempts = 0;
+    $maxAttempts = 50;
+    while ($attempts < $maxAttempts) {
+        $tag = str_pad(strval(rand(0, 9999)),4,"0",STR_PAD_LEFT);
+        if(!user::isTagTaken($username,$tag)){
+            return $tag;
+        }
+        $attempts++;
+    }
+    throw new Exception("unable to generate unique tag");
+}
+
 /***********************************
  * ------- REGISTER FUNCTION -------
  ***********************************/
@@ -21,8 +39,9 @@ function register($post)
     $username = trim($post['username']);
     $password = $post['password'];
     $confirm_password = $post['confirm_password'];
+    $tag = generateUniqueTag($username);
 
-    //check is passwords match
+    //check if passwords match
     if ($password !== $confirm_password) {
         $erorr_msg = "Passwords do not match";
         require('view/registerView.php');
@@ -44,6 +63,7 @@ function register($post)
     //hash the password
     $hashedPassword = hash('sha256', $post['password']);
     $user->setPassword($hashedPassword);
+    $user->setTag($tag);
 
     $user_id =  User::createUser($user);
 
