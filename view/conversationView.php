@@ -3,6 +3,7 @@
 <div class="container-fluid">
     <div class="row">
 
+        <?= $servers_list_partial?>
         <?= $conversation_list_partial ?>
 
         <div class="col-sm-6 col-md-9 mt-2">

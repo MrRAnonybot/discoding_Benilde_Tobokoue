@@ -36,7 +36,7 @@ function addFriend($user_id)
             $message = 'Ami ' . $newFriend['username'] . ' ajouté !';
         }
     }
-
+    $servers_list_partial = serverListPartial($user_id);
     $conversation_list_partial = conversationListPartial($user_id);
     require('view/friendAddView.php');
 }
@@ -45,6 +45,7 @@ function displayFriends($user_id)
 {
     $user_data = User::getUserById($user_id);
     $friends = User::getFriendsForUser($user_id);
+    $servers_list_partial = serverListPartial($user_id);
     $conversation_list_partial = conversationListPartial($user_id);
     require('view/friendView.php');
 }

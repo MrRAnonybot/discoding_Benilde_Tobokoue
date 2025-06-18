@@ -48,6 +48,7 @@ function conversationDetail($user_id)
     $messages = Message::getMessagesForConversationId($conversation_id);
     $user = User::getUserById($user_id);
     $interlocutor = User::getUserById($conversation['interlocutor_id']);
+    $servers_list_partial = serverListPartial($user_id);
     $conversation_list_partial = conversationListPartial($user_id);
     require('view/conversationView.php');
 }

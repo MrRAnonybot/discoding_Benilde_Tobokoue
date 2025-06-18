@@ -81,6 +81,7 @@ function register($post)
     //login the user
     //$_SESSION['user_id'] = $user_id;
 
+    //token in the url to be easily accesible to be use in the link int the message "link http://localhost/index.php?action=confirm&token="
     header("Location: /index.php?action=confirm&message=" . urlencode("Your account has been created. Please confirm your email") ."/". $confirmation_token);
     exit;
 }

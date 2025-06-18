@@ -11,6 +11,7 @@ require_once('controller/friendController.php');
 require_once('controller/loginController.php');
 require_once('controller/registerController.php');
 require_once('controller/confirmController.php');
+require_once('controller/serverController.php');
 
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
@@ -51,6 +52,12 @@ if (isset($_GET['action'])) {
                 createServer($_POST);
             } else {
                 require('view/serverCreationView.php');
+            }
+            break;
+
+        case 'server':
+            if (isset($_GET['id'])) {
+                displayServer((int)$_GET['id']);
             }
             break;
 

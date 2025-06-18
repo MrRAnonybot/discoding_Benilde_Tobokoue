@@ -6,7 +6,13 @@
         <input type="text" name="server_name" id="server_name" class="form-control" required>
     </div>
     <button type="submit" class="btn btn-primary">Create Server</button>
+    <div class="server-icon mb-3">
+        <a href="index.php?action=friend"
+           class="btn btn-secondary d-flex align-items-center justify-content-center"
+           style="width: 48px; height: 48px; padding: 0;"> cancel </a>
+    </div>
 </form>
 
+
 <?php $content = ob_get_clean(); ?>
-<?php require(__DIR__ . '/base.php'); ?>
+<?php require('base.php'); ?>
