@@ -32,10 +32,15 @@ function login($post)
         require('view/loginView.php');
         return;
     }
+    // check for account confirmation
+    if(!$user_data['is_confirmed']){
+        $error_msg = "please confirm your account before logging in";
+        require('view/loginView.php');
+        return;
+    }
 
     // Set session
     $_SESSION['user_id'] = $user_data['id'];
-    $user_id = $_SESSION['user_id'] ?? false;
     header('location: index.php ');
 }
 
