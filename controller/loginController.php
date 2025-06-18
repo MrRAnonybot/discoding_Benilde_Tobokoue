@@ -41,6 +41,7 @@ function login($post)
 
     // Set session
     $_SESSION['user_id'] = $user_data['id'];
+    $user_id = $_SESSION['user_id'] ?? false;
     header('location: index.php ');
 }
 

@@ -46,6 +46,14 @@ if (isset($_GET['action'])) {
             confirmAccount();
             break;
 
+        case 'createServer':
+            if (!empty($_POST)) {
+                createServer($_POST);
+            } else {
+                require('view/serverCreationView.php');
+            }
+            break;
+
     }
 } else {
     $user_id = $_SESSION['user_id'] ?? false;
