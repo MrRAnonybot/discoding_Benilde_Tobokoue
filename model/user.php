@@ -10,6 +10,8 @@ class User
     protected $password;
     protected $avatar_url;
     protected $tag;
+    protected $confirmation_token;
+    protected $is_confirmed;
 
     /**
      * @return mixed
@@ -105,6 +107,36 @@ class User
     public function setTag($tag)
     {
         $this->tag = $tag;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmation_token;
+    }
+
+    /**
+     * @param mixed $confirmation_token
+     */
+    public function setConfirmationToken($confirmation_token)
+    {
+        $this->confirmation_token = $confirmation_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsConfirmed(){
+        return $this->is_confirmed;
+    }
+
+    /**
+     * @param mixed $is_confirmed
+     */
+    public function setIsConfirmed($is_confirmed){
+        $this->is_confirmed = $is_confirmed;
     }
 
 
@@ -223,13 +255,15 @@ class User
         //open database connection
         $db = init_db();
 
-        $req = $db->prepare("INSERT INTO users (email, username,password,avatar_url,tag) VALUES (?, ?, ?, ?,?)");
+        $req = $db->prepare("INSERT INTO users (email,username,password,avatar_url,tag,confirmation_token,is_confirmed) VALUES (?,?,?,?,?,?,?)");
         $req->execute([
             $user->getEmail(),
             $user->getUsername(),
             $user->getPassword(),
             "/static/lib/bootstrap-icons-1.5.0/person-fill.svg",
-            $user->getTag()
+            $user->getTag(),
+            $user->getConfirmationToken(),
+            $user->getIsConfirmed()
         ]);
 
         $id = $db->lastInsertId();
@@ -268,4 +302,30 @@ class User
 
         return $req->fetch();
     }
+
+
+    /***************************************************
+     * ------- FIND USER BY CONFIRMATION TOKEN --------
+     ***************************************************/
+    public static function findUserByToken(string $token)
+    {
+        $db = init_db();
+        $req = $db->prepare("SELECT * FROM users WHERE confirmation_token = ?");
+        $req->execute([$token]);
+        $user = $req->fetch();
+        $db = null;
+        return $user;
+    }
+
+    /******************************************
+     * ------- CONFIRM USER ACCOUNT --------
+     ******************************************/
+    public static function confirmUser(int $id)
+    {
+        $db = init_db();
+        $req = $db->prepare("UPDATE users SET is_confirmed = 1, confirmation_token = NULL WHERE id = ?");
+        $req->execute([$id]);
+        $db = null;
+    }
+
 }

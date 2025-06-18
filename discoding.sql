@@ -94,19 +94,21 @@ CREATE TABLE `users` (
   `id` int NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `tag` varchar(4) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `avatar_url` varchar(500) DEFAULT NULL
+  `avatar_url` varchar(500) DEFAULT NULL,
+  `tag` varchar(4) NOT NULL,
+  `confirmation_token` varchar(255) DEFAULT NULL,
+  `is_confirmed` BOOLEAN NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `avatar_url`) VALUES
-(1, 'coding@factory.fr', 'coding', '123456', 'https://media-exp1.licdn.com/dms/image/C560BAQFveTMznUt80w/company-logo_200_200/0/1606411224030?e=2159024400&v=beta&t=Q_n0Ieldw9WSqZs5sNwqS4cfTKRJW1nmud2xhjRrgZM'),
-(2, 'robin@factory.fr', 'robin', 'robin', 'https://i.pinimg.com/originals/92/57/8a/92578adbf3632f085bffdc00c0eccb47.jpg'),
-(3, 'bob@bob.com', 'bob', 'bob', NULL);
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `avatar_url`,`tag`) VALUES
+(1, 'coding@factory.fr', 'coding', '123456', 'https://media-exp1.licdn.com/dms/image/C560BAQFveTMznUt80w/company-logo_200_200/0/1606411224030?e=2159024400&v=beta&t=Q_n0Ieldw9WSqZs5sNwqS4cfTKRJW1nmud2xhjRrgZM',0000),
+(2, 'robin@factory.fr', 'robin', 'robin', 'https://i.pinimg.com/originals/92/57/8a/92578adbf3632f085bffdc00c0eccb47.jpg',0001),
+(3, 'bob@bob.com', 'bob', 'bob', NULL,0002);
 
 --
 -- Indexes for dumped tables

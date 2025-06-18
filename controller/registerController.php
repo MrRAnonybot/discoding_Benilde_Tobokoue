@@ -37,6 +37,18 @@ function register($post)
     $password = $post['password'];
     $confirm_password = $post['confirm_password'];
     $tag = generateUniqueTag($username);
+    //generate a unique confirmation token
+    $confirmation_token = bin2hex(random_bytes(32)); // 64-character hex string
+    $is_confirmed = 0;
+
+    //confirmation link
+    $confirmation_link = "http://localhost/index.php?action=confirm&token=". $confirmation_token;
+    //mail structure
+    $subject = "Confirm your Discoding account";
+    $message = "Hello " . $username . ",\n\nClick this link to confirm your account:\n" . $confirmation_link;
+    $headers = "From: no-reply@discoding.com";
+    //mail($email, $subject, $message, $headers);
+
 
     //check if passwords match
     if ($password !== $confirm_password) {
@@ -61,12 +73,14 @@ function register($post)
     $hashedPassword = hash('sha256', $post['password']);
     $user->setPassword($hashedPassword);
     $user->setTag($tag);
+    $user->setConfirmationToken($confirmation_token);
+    $user->setIsConfirmed($is_confirmed);
 
     $user_id =  User::createUser($user);
 
     //login the user
-    $_SESSION['user_id'] = $user_id;
+    //$_SESSION['user_id'] = $user_id;
 
-    //redirect to home
-    header('location: index.php');
+    header("Location: /index.php?action=confirm&message=" . urlencode("Your account has been created. Please confirm your email") ."/". $confirmation_token);
+    exit;
 }

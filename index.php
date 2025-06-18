@@ -10,6 +10,7 @@ require_once('controller/conversationController.php');
 require_once('controller/friendController.php');
 require_once('controller/loginController.php');
 require_once('controller/registerController.php');
+require_once('controller/confirmController.php');
 
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
@@ -40,6 +41,11 @@ if (isset($_GET['action'])) {
                 registerPage();
             }
             break;
+
+        case 'confirm':
+            confirmAccount();
+            break;
+
     }
 } else {
     $user_id = $_SESSION['user_id'] ?? false;
